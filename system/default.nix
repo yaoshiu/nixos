@@ -10,6 +10,7 @@
 
   environment.systemPackages = with pkgs; [
     wget
+    gh
   ];
 
   programs.nix-ld.enable = true;
