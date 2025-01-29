@@ -11,6 +11,7 @@
   environment.systemPackages = with pkgs; [
     wget
     gh
+    wslu
   ];
 
   programs.nix-ld.enable = true;
