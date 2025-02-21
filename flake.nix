@@ -29,6 +29,14 @@
         nixos = nixpkgs.lib.nixosSystem rec {
           system = "x86_64-linux";
           modules = [
+            {
+              nix = {
+                channel.enable = false;
+                registry.nixpkgs.flake = nixpkgs;
+                settings.nix-path = [ "nixpkgs=${nixpkgs}" ];
+              };
+            }
+
             nixos-wsl.nixosModules.default
             {
               system.stateVersion = "24.05";
