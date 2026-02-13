@@ -32,7 +32,7 @@ jobs:
           ssh-keyscan -H ${{ github.event.inputs.target_ip }} >> ~/.ssh/known_hosts
 
       - name: Run nixos-anywhere
-        run: >
-          nix run github:nix-community/nixos-anywhere --
-            --flake .#${{ github.event.inputs.target_name }}
+        run: |
+          nix run github:nix-community/nixos-anywhere -- \
+            --flake .#${{ github.event.inputs.target_name }} \
             root@${{ github.event.inputs.target_ip }}
