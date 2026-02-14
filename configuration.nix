@@ -19,8 +19,12 @@
   networking = {
     hostName = "zgo-la";
     interfaces.eth0 = {
-      address = "23.159.248.67";
-      prefixLength = 24;
+      ipv4.addresses = [
+        {
+          address = "23.159.248.67";
+          prefix = 24;
+        }
+      ];
     };
     defaultGateway = "23.159.248.1";
     nameservers = [
@@ -32,6 +36,7 @@
   services.openssh.enable = true;
 
   users.users.root = {
+    initialPassword = "initial";
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAID4tUJIE/YKZQTSbbewzv37957T9X6aNcvKlxDoWcALO huangyifei@MAGIT04390.local"
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINNLLm6m7F59XdbsiAblXyOz15kGNBmZKQ+7VoIYHm8V huangyifei@MAGIT04390.local"
