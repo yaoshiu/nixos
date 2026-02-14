@@ -7,20 +7,38 @@
 
   nix = {
     settings = {
-      experimental-features = [ "nix-command" "flakes" ];
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
+      auto-optimise-store = true;
+    };
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 7d";
     };
   };
 
-  boot.loader = {
-    systemd-boot = {
-      enable = true;
-      xbootldrMountPoint = "/boot";
+  boot = {
+    loader = {
+      systemd-boot = {
+        enable = true;
+        xbootldrMountPoint = "/boot";
+      };
+      efi = {
+        canTouchEfiVariables = true;
+        efiSysMountPoint = "/efi";
+      };
     };
-    efi = {
-      canTouchEfiVariables = true;
-      efiSysMountPoint = "/efi";
+
+    kernel.sysctl = {
+      "net.core.default_qdisc" = "fq";
+      "net.ipv4.tcp_congestion_control" = "bbr";
     };
   };
+
+  zramSwap.enable = true;
 
   networking = {
     hostName = "zgo-la";
@@ -39,7 +57,26 @@
     ];
   };
 
-  services.openssh.enable = true;
+  services.openssh = {
+    enable = true;
+    settings = {
+      PasswordAuthentication = false;
+      PermitRootLogin = "prohibit-password";
+    };
+  };
+
+  networking.firewall = {
+    enable = true;
+    allowedTCPPorts = [
+      80
+      443
+    ];
+  };
+
+  services.fail2ban = {
+    enable = true;
+    bantime = "1h";
+  };
 
   users.users.root = {
     initialPassword = "initial";
