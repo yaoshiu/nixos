@@ -19,6 +19,10 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    treefmt-nix = {
+      url = "github:numtide/treefmt-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -27,11 +31,15 @@
       disko,
       flake-parts,
       sops-nix,
+      treefmt-nix,
       ...
     }:
     flake-parts.lib.mkFlake { inherit inputs; } (
       { ... }:
       {
+        imports = [
+          treefmt-nix.flakeModule
+        ];
         flake = {
           nixosConfigurations.zgo-la = nixpkgs.lib.nixosSystem {
             system = "x86_64-linux";
@@ -44,16 +52,27 @@
             ];
           };
         };
-        systems = [ "x86_64-linux" "aarch64-darwin" ];
-        perSystem = { pkgs, ... }: {
-          devShells.default = pkgs.mkShell {
-            packages = with pkgs; [
-              nixos-rebuild-ng
-              ssh-to-age
-              sops
-            ];
+        systems = [
+          "x86_64-linux"
+          "aarch64-darwin"
+        ];
+        perSystem =
+          { pkgs, ... }:
+          {
+            devShells.default = pkgs.mkShell {
+              packages = with pkgs; [
+                nixos-rebuild-ng
+                ssh-to-age
+                sops
+              ];
+            };
+
+            treefmt = {
+              programs = {
+                nixfmt.enable = true;
+              };
+            };
           };
-        };
       }
     );
 }

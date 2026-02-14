@@ -33,6 +33,7 @@ in
     };
     nat = {
       enable = lib.mkDefault true;
+      externalInterface = "eth0";
       forwardPorts = [
         {
           destination = "localhost:8082";
