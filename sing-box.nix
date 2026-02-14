@@ -37,7 +37,7 @@ in
           };
           users = {
             _secret = config.sops.secrets.users_json.path;
-            quote = true;
+            quote = false;
           };
 
           multiplex.enabled = true;
@@ -51,7 +51,7 @@ in
 
           users = {
             _secret = config.sops.secrets.users_json.path;
-            quote = true;
+            quote = false;
           };
 
           tls = {
@@ -75,7 +75,7 @@ in
 
           users = {
             _secret = config.sops.secrets.users_json.path;
-            quote = true;
+            quote = false;
           };
 
           tls = {
