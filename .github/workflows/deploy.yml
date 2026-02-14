@@ -33,6 +33,6 @@ jobs:
 
       - name: Run nixos-rebuild
         run: |
-          nix run nixpkgs#nixos-rebuild-ng switch \
+          nix run nixpkgs#nixos-rebuild-ng -- switch \
             --flake .#${{ github.event.inputs.target_name }} \
             --target-host root@${{ github.event.inputs.target_ip }}
