@@ -13,6 +13,7 @@ in
       group = config.users.groups.sing-box.name;
     };
   };
+
   services.sing-box = {
     enable = true;
     settings = {
