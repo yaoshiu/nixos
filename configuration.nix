@@ -17,7 +17,7 @@
   };
 
   networking = {
-    hostName = "zgo-la.fayash.me";
+    hostName = "zgo-la";
     interfaces.eth0 = {
       address = "23.159.248.67";
       prefixLength = 24;
