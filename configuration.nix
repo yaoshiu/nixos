@@ -42,6 +42,7 @@
 
   networking = {
     hostName = "zgo-la";
+    domain = "fayash.me";
     interfaces.eth0 = {
       ipv4.addresses = [
         {

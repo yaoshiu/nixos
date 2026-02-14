@@ -15,6 +15,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     flake-parts.url = "github:hercules-ci/flake-parts";
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -22,6 +26,7 @@
       nixpkgs,
       disko,
       flake-parts,
+      sops-nix,
       ...
     }:
     flake-parts.lib.mkFlake { inherit inputs; } (
@@ -34,6 +39,7 @@
               ./configuration.nix
               ./disk-config.nix
               disko.nixosModules.default
+              sops-nix.nixosModules.default
             ];
           };
         };
@@ -42,6 +48,8 @@
           devShells.default = pkgs.mkShell {
             packages = with pkgs; [
               nixos-rebuild-ng
+              ssh-to-age
+              sops
             ];
           };
         };
