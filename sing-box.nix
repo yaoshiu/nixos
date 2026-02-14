@@ -93,6 +93,10 @@ in
               domain = domain;
               email = "akafayash@icloud.com";
             };
+            alpn = [
+              "h2"
+              "http/1.1"
+            ];
           };
           multiplex.enabled = true;
         }
@@ -117,6 +121,7 @@ in
               domain = domain;
               email = "akafayash@icloud.com";
             };
+            alpn = [ "h3" ];
           };
         }
       ];
