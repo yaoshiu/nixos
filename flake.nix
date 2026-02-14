@@ -38,6 +38,7 @@
             modules = [
               ./configuration.nix
               ./disk-config.nix
+              ./sing-box.nix
               disko.nixosModules.default
               sops-nix.nixosModules.default
             ];
