@@ -40,13 +40,19 @@ in
       ];
     };
     nat = {
-      enable = lib.mkDefault true;
+      enable = true;
       externalInterface = "eth0";
+      internalInterfaces = [ "eth0" ];
       forwardPorts = [
         {
           destination = "127.0.0.1:8082";
           sourcePort = "20000:50000";
           proto = "udp";
+        }
+        {
+          destination = "127.0.0.1:8082";
+          sourcePort = "20000:50000";
+          proto = "tcp";
         }
       ];
     };
