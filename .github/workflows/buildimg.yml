@@ -1,0 +1,35 @@
+name: "Build NixOS Image"
+on:
+  workflow_dispatch:
+    inputs:
+      target_name:
+        description: Target Configuration Name
+        required: true
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Install Nix
+        uses: cachix/install-nix-action@v31
+
+      - name: Setup Cachix
+        uses: cachix/cachix-action@v15
+        with:
+          name: fayash
+          authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
+
+      - name: Build Disko Image
+        run: |
+          nix build .#nixosConfigurations.${{ github.event.inputs.target_name }}.config.system.build.diskoImages
+          mkdir -p output
+          cp -L result/*.raw output/nixos.raw
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v6
+        with:
+          name: nixos-disko-image
+          path: output/nixos.raw
+          retention-days: 1
