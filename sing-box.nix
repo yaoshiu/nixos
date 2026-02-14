@@ -31,13 +31,16 @@ in
         }
       ];
     };
-    nat.forwardPorts = [
-      {
-        destination = "localhost:8082";
-        sourcePort = "20000:50000";
-        proto = "udp";
-      }
-    ];
+    nat = {
+      enable = true;
+      forwardPorts = [
+        {
+          destination = "localhost:8082";
+          sourcePort = "20000:50000";
+          proto = "udp";
+        }
+      ];
+    };
   };
 
   services.sing-box = {
