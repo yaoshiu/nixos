@@ -44,7 +44,7 @@ in
       externalInterface = "eth0";
       forwardPorts = [
         {
-          destination = "[::]:8082";
+          destination = "127.0.0.1:8082";
           sourcePort = "20000:50000";
           proto = "udp";
         }
