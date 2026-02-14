@@ -4,11 +4,11 @@ let
 in
 {
   sops = {
-    defaultSopsFile = ./secrets/example.yaml;
+    defaultSopsFile = ./secrets/sing-box.yaml;
     age = {
       sshKeyPaths = [
         "/etc/ssh/ssh_host_ed25519_key"
-        "/root/.ssh/id_ed25519"
+        "/home/runner/.ssh/id_ed25519"
       ];
       keyFile = "/var/lib/sops-nix/key.txt";
       generateKey = true;
