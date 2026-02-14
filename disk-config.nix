@@ -26,7 +26,8 @@
               XBOOTLDR = {
                 priority = 2;
                 name = "XBOOTLDR";
-                size = "1G";
+                start = "257M";
+                end = "2G";
                 type = "EA00";
                 content = {
                   type = "filesystem";
