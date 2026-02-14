@@ -3,7 +3,7 @@
     devices = {
       disk = {
         main = {
-          imageSize = "8G";
+          imageSize = "4G";
           type = "disk";
           device = "/dev/sda";
           content = {
