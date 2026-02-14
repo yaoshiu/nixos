@@ -131,6 +131,13 @@ in
     };
   };
 
+  systemd.services.sing-box = {
+    serviceConfig = {
+      AmbientCapabilities = [ "CAP_NET_BIND_SERVICE" ];
+      CapabilityBoundingSet = [ "CAP_NET_BIND_SERVICE" ];
+    };
+  };
+
   boot.kernel.sysctl = {
     "net.core.rmem_max" = 8000000;
     "net.core.wmem_max" = 8000000;
