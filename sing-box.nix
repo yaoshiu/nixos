@@ -19,18 +19,9 @@ in
       allowedTCPPorts = [
         8080
         8081
-        8082
       ];
       allowedUDPPorts = [
-        8080
-        8081
         8082
-      ];
-      allowedTCPPortRanges = [
-        {
-          from = 20000;
-          to = 50000;
-        }
       ];
       allowedUDPPortRanges = [
         {
@@ -38,23 +29,14 @@ in
           to = 50000;
         }
       ];
-    };
-    nat = {
-      enable = true;
-      externalInterface = "eth0";
-      internalInterfaces = [ "eth0" ];
-      forwardPorts = [
-        {
-          destination = "127.0.0.1:8082";
-          sourcePort = "20000:50000";
-          proto = "udp";
-        }
-        {
-          destination = "127.0.0.1:8082";
-          sourcePort = "20000:50000";
-          proto = "tcp";
-        }
-      ];
+
+      extraCommands = ''
+        iptables -t nat -A PREROUTING -i eth0 -p udp --dport 20000:50000 -j REDIRECT --to-port 8082
+      '';
+
+      extraStopCommands = ''
+        iptables -t nat -D PREROUTING -i eth0 -p udp --dport 20000:50000 -j REDIRECT --to-port 8082 || true
+      '';
     };
   };
 
