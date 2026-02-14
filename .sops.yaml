@@ -1,7 +1,9 @@
 keys:
   - &gha age1cvhhqc4sl220sym84ytc35fh27q7dffpwwnyqk8jywfa37yf4s8q40zc86
+  - &zgo-la age1dgq2qden2a5j3rlkye0a6dqdx6e7yuw38v9xnt3z5ldx2dsf0y9s66jtkp
 creation_rules:
   - path_regex: secrets/[^/]+\.(yaml|json|env|ini)$
     key_groups:
       - age:
           - *gha
+          - *zgo-la
