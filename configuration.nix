@@ -5,6 +5,12 @@
     (modulesPath + "/profiles/qemu-guest.nix")
   ];
 
+  nix = {
+    settings = {
+      experimental-features = [ "nix-command" "flakes" ];
+    };
+  };
+
   boot.loader = {
     systemd-boot = {
       enable = true;
