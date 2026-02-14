@@ -56,6 +56,13 @@
       "1.1.1.1"
       "8.8.8.8"
     ];
+    firewall = {
+      enable = true;
+      allowedTCPPorts = [
+        80
+        443
+      ];
+    };
   };
 
   services.openssh = {
@@ -64,14 +71,6 @@
       PasswordAuthentication = false;
       PermitRootLogin = "prohibit-password";
     };
-  };
-
-  networking.firewall = {
-    enable = true;
-    allowedTCPPorts = [
-      80
-      443
-    ];
   };
 
   services.fail2ban = {

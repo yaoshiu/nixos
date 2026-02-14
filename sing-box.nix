@@ -14,6 +14,32 @@ in
     };
   };
 
+  networking = {
+    firewall = {
+      allowedTCPPorts = [
+        8080
+        8081
+        8082
+      ];
+      allowedUDPPorts = [
+        8082
+      ];
+      allowedUDPPortRanges = [
+        {
+          from = 20000;
+          to = 50000;
+        }
+      ];
+    };
+    nat.forwardPorts = [
+      {
+        destination = "localhost:8082";
+        sourcePort = "20000:50000";
+        proto = "udp";
+      }
+    ];
+  };
+
   services.sing-box = {
     enable = true;
     settings = {
@@ -97,5 +123,10 @@ in
         };
       };
     };
+  };
+
+  boot.kernel.sysctl = {
+    "net.core.rmem_max" = 8000000;
+    "net.core.wmem_max" = 8000000;
   };
 }
