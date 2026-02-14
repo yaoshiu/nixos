@@ -22,6 +22,8 @@ in
         8082
       ];
       allowedUDPPorts = [
+        8080
+        8081
         8082
       ];
       allowedUDPPortRanges = [
