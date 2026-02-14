@@ -8,12 +8,18 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
     steps:
       - name: Checkout repository
         uses: actions/checkout@v6
 
       - name: Install Nix
         uses: cachix/install-nix-action@v31
+
+      - name: Setup Nix Cache
+        uses: DeterminateSystems/magic-nix-cache-action@main
 
       - name: Setup Cachix
         uses: cachix/cachix-action@v15
