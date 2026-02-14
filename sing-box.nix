@@ -65,8 +65,6 @@ in
             _secret = config.sops.secrets.users_json.path;
             quote = false;
           };
-
-          multiplex.enabled = true;
         }
 
         # === Trojan ===
@@ -92,7 +90,6 @@ in
               "http/1.1"
             ];
           };
-          multiplex.enabled = true;
         }
 
         # === Hysteria2 ===
