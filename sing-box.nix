@@ -140,5 +140,6 @@ in
   boot.kernel.sysctl = {
     "net.core.rmem_max" = 8000000;
     "net.core.wmem_max" = 8000000;
+    "net.ipv4.tcp_fastopen" = 3;
   };
 }
