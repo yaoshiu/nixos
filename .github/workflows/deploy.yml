@@ -1,4 +1,4 @@
-name: "Force Deploy to Machine"
+name: "Deploy to Machine"
 on:
   workflow_dispatch:
     inputs:
@@ -31,8 +31,8 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H ${{ github.event.inputs.target_ip }} >> ~/.ssh/known_hosts
 
-      - name: Run nixos-anywhere
+      - name: Run nixos-rebuild
         run: |
-          nix run github:nix-community/nixos-anywhere -- \
+          nix run nixpkgs#nixos-rebuild-ng switch \
             --flake .#${{ github.event.inputs.target_name }} \
-            root@${{ github.event.inputs.target_ip }}
+            --target-host root@${{ github.event.inputs.target_ip }}
