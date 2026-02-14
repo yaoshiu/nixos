@@ -27,19 +27,15 @@
     flake-parts.lib.mkFlake { inherit inputs; } (
       { ... }:
       {
-        imports = [
-          disko.flakeModules.default
-        ];
         flake = {
           nixosConfigurations.zgo-la = nixpkgs.lib.nixosSystem {
             system = "x86_64-linux";
             modules = [
               ./configuration.nix
               ./disk-config.nix
+              disko.nixosModules.default
             ];
           };
-
-          diskoConfigurations.zgo-la = ./disk-config.nix;
         };
         systems = [ "x86_64-linux" "aarch64-darwin" ];
         perSystem = { pkgs, ... }: {
