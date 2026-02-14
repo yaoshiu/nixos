@@ -5,7 +5,7 @@
   services.sing-box = {
     enable = true;
     settings = {
-      _secrets = config.sops.templates."sing-box.json".path;
+      _secret = config.sops.templates."sing-box.json".path;
     };
   };
 }
