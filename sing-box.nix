@@ -26,6 +26,12 @@ in
         8081
         8082
       ];
+      allowedTCPPortRanges = [
+        {
+          from = 20000;
+          to = 50000;
+        }
+      ];
       allowedUDPPortRanges = [
         {
           from = 20000;
