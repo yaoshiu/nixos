@@ -1,4 +1,4 @@
-{ config, ... }:
+{ lib, config, ... }:
 let
   domain = config.networking.fqdn;
 in
@@ -32,7 +32,7 @@ in
       ];
     };
     nat = {
-      enable = true;
+      enable = lib.mkDefault true;
       forwardPorts = [
         {
           destination = "localhost:8082";
