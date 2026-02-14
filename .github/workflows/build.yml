@@ -30,8 +30,9 @@ jobs:
 
       - name: Build Disko Image
         run: |
+          sudo prlimit --pid $$ --nofile=100000:100000
+          ulimit -n
           nix build .#nixosConfigurations.${{ github.event.inputs.target_name }}.config.system.build.diskoImagesScript
-          ulimit -n 100000
           ./result --build-memory 4096
           mkdir -p output
           cp -L *.raw output/
