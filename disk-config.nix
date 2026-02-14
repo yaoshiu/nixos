@@ -1,10 +1,9 @@
 {
   disko = {
-    memSize = 4096;
     devices = {
       disk = {
         main = {
-          imageSize = "4G";
+          imageSize = "8G";
           type = "disk";
           device = "/dev/sda";
           content = {
