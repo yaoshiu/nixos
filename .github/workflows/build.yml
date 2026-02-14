@@ -23,9 +23,10 @@ jobs:
 
       - name: Build Disko Image
         run: |
-          nix build .#nixosConfigurations.${{ github.event.inputs.target_name }}.config.system.build.diskoImages
+          nix build .#nixosConfigurations.${{ github.event.inputs.target_name }}.config.system.build.diskoImagesScript
+          ./result --build-memory 4096
           mkdir -p output
-          cp -L ./result/*.raw output/
+          cp -L *.raw output/
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v6
