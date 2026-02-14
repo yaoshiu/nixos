@@ -6,7 +6,7 @@ on:
         description: Target Configuration Name
         required: true
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
