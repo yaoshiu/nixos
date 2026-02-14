@@ -30,11 +30,11 @@ jobs:
 
       - name: Build Disko Image
         run: |
-          nix build .#nixosConfigurations.${{ github.event.inputs.target_name }}.config.system.build.diskoImagesScript
+          nix build '.#nixosConfigurations.${{ github.event.inputs.target_name }}.config.system.build.diskoImagesScript'
           sudo ./result --build-memory 4096
           mkdir -p output
           sudo mv *.raw output/
-          sudo chown -R $USER:$USER output/
+          sudo chown -R "$USER:$USER" output/
           ls -lh output/
 
       - name: Upload Artifact

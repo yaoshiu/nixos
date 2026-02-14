@@ -27,12 +27,12 @@ jobs:
       - name: Prepare SSH key
         run: |
           mkdir -p ~/.ssh
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_ed25519
+          echo '${{ secrets.SSH_PRIVATE_KEY }}' > ~/.ssh/id_ed25519
           chmod 600 ~/.ssh/id_ed25519
-          ssh-keyscan -H ${{ github.event.inputs.target_ip }} >> ~/.ssh/known_hosts
+          ssh-keyscan -H '${{ github.event.inputs.target_ip }}' >> ~/.ssh/known_hosts
 
       - name: Run nixos-rebuild
         run: |
           nix run nixpkgs#nixos-rebuild-ng -- switch \
-            --flake .#${{ github.event.inputs.target_name }} \
-            --target-host root@${{ github.event.inputs.target_ip }}
+            --flake '.#${{ github.event.inputs.target_name }}' \
+            --target-host 'root@${{ github.event.inputs.target_ip }}'
