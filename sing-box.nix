@@ -1,14 +1,16 @@
-{ lib, config, ... }:
+{ config, ... }:
 let
   domain = config.networking.fqdn;
 in
 {
   sops.secrets = {
     server_password = {
+      sopsFile = ./secrets/sing-box.yaml;
       owner = config.users.users.sing-box.name;
       group = config.users.groups.sing-box.name;
     };
     users_json = {
+      sopsFile = ./secrets/sing-box.yaml;
       owner = config.users.users.sing-box.name;
       group = config.users.groups.sing-box.name;
     };
@@ -57,7 +59,6 @@ in
           network = "tcp";
           method = "2022-blake3-aes-128-gcm";
 
-          # 使用 _secret 语法指向解密后的文件路径
           password = {
             _secret = config.sops.secrets.server_password.path;
           };
