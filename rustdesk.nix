@@ -1,6 +1,6 @@
 { ...  }: {
   services.rustdesk-server = {
-    enalbe = true;
+    enable = true;
     openFirewall = true;
   };
 }
