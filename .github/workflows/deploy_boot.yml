@@ -1,0 +1,38 @@
+name: "Deploy to Machine (Boot)"
+on:
+  workflow_dispatch:
+    inputs:
+      target_ip:
+        description: Target IP
+        required: true
+      target_name:
+        description: Target Configuration Name
+        required: true
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Nix
+        uses: cachix/install-nix-action@v31
+
+      - name: Setup Cachix
+        uses: cachix/cachix-action@v15
+        with:
+          name: fayash
+          authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
+
+      - name: Prepare SSH key
+        run: |
+          mkdir -p ~/.ssh
+          echo '${{ secrets.SSH_PRIVATE_KEY }}' > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan -H '${{ github.event.inputs.target_ip }}' >> ~/.ssh/known_hosts
+
+      - name: Run nixos-rebuild
+        run: |
+          nix run nixpkgs#nixos-rebuild-ng -- boot \
+            --flake '.#${{ github.event.inputs.target_name }}' \
+            --target-host 'root@${{ github.event.inputs.target_ip }}'
