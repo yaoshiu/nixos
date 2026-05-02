@@ -84,6 +84,7 @@
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAID4tUJIE/YKZQTSbbewzv37957T9X6aNcvKlxDoWcALO huangyifei@MAGIT04390.local"
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINNLLm6m7F59XdbsiAblXyOz15kGNBmZKQ+7VoIYHm8V huangyifei@MAGIT04390.local"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHg/vEWY4rZyuSLaM5JBgZSqhkqEy3YT+H6KfH4Syb6t huangyifei@huangyifeis-MacBook-Pro.local"
     ];
   };
 
